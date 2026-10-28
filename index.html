@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d2d22">
+<meta name="theme-color" content="#04120e">
 <meta name="description" content="Avalie o perfil do seu projeto de campo society com a NOVE. Atendimento no Pará e Maranhão, com facilidade para atender Carajás e Belém.">
 <title>NOVE — Investimento em Campo Society</title>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/styles.css?v=player-20261028-2" as="style">
 <link rel="stylesheet" href="assets/styles.css?v=player-20261028-2">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700;800&display=swap');
-body{font-family:"Barlow",Arial,sans-serif}
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600;700;800&display=swap');
+body{font-family:"Barlow",Arial,sans-serif;background:#04120e;color:#e0e0e0}
 .brand,.campaign-label,.eyebrow,.question-kicker,.primary-cta,.play-instruction{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif}
 .hero h1,.proof-heading h2,.closing-section h2,.lead-form h2,.result-panel h2,.question-title,.case-title{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:.95}
 .brand{font-weight:900;letter-spacing:-.035em}
@@ -35,31 +35,32 @@ body{font-family:"Barlow",Arial,sans-serif}
 .captured-field{display:none!important}
 .floating-whatsapp svg{width:28px;height:28px;fill:#fff}
 
-/* --- NOVO DESIGN EDITORIAL DARK --- */
-.proof-strip{padding:100px 20px;background:#081c15;color:#fff;position:relative;overflow:hidden}
-.proof-strip::before{content:"";position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(49,231,111,0.08) 0%,transparent 70%);pointer-events:none}
-.proof-container{max-width:1100px;margin:0 auto;position:relative;z-index:2}
-.proof-header{margin-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:40px}
-.proof-header .eyebrow{color:#31e76f;margin-bottom:16px;display:block}
-.proof-header h2{font-size:clamp(40px,6vw,64px);color:#fff;margin:0;max-width:800px}
-.case-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
-.case-visual{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.5)}
-.case-visual video,.case-visual img{width:100%;height:auto;display:block;filter:contrast(1.1) saturate(1.1)}
-.case-visual::after{content:"ANTES / DEPOIS";position:absolute;bottom:20px;left:20px;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);color:#fff;padding:8px 16px;font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:0.1em;font-size:12px;border:1px solid rgba(255,255,255,0.2)}
-.case-narrative h3{font-size:clamp(28px,4vw,42px);color:#fff;margin:0 0 30px;line-height:1.1}
-.case-narrative p{font-size:18px;line-height:1.7;color:rgba(255,255,255,0.8);margin-bottom:24px;font-weight:300}
-.case-narrative strong{color:#31e76f;font-weight:600}
-.case-stats{display:flex;gap:40px;margin-top:50px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1)}
-.stat-item{flex:1}
-.stat-number{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;margin-bottom:8px;display:block}
-.stat-label{font-size:13px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.05em;line-height:1.4}
+/* --- RAW EDITORIAL DESIGN --- */
+.proof-strip{padding:0;background:#04120e;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:80vh}
+.proof-container{width:100%;max-width:1400px;margin:0 auto;padding:80px 40px;display:grid;grid-template-columns:1.5fr 1fr;gap:80px;align-items:center;flex:1}
+.proof-header{grid-column:1/-1;margin-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+.proof-header .eyebrow{color:#39ff14;font-size:14px;margin:0;text-transform:uppercase;letter-spacing:0.1em}
+.proof-header h2{font-size:clamp(32px,5vw,56px);color:#fff;margin:0;max-width:800px;line-height:0.95;text-transform:uppercase}
+.case-visual{position:relative;width:100%;height:600px;background:#000;overflow:hidden}
+.case-visual video,.case-visual img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(20%) contrast(1.1)}
+.case-visual::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to right,transparent 60%,#04120e 100%);pointer-events:none}
+.case-narrative{position:relative;z-index:2}
+.case-narrative h3{font-size:clamp(24px,3vw,36px);color:#fff;margin:0 0 30px;line-height:1.2;font-weight:300}
+.case-narrative h3 strong{font-weight:800;color:#39ff14;display:block;margin-bottom:10px;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:1.2em}
+.case-narrative p{font-size:18px;line-height:1.6;color:rgba(255,255,255,0.7);margin-bottom:30px;font-weight:300}
+.case-narrative .highlight{color:#fff;font-weight:500;border-left:2px solid #39ff14;padding-left:20px;margin:40px 0}
+.case-metrics-inline{display:flex;gap:60px;margin-top:50px;border-top:1px solid rgba(255,255,255,0.1);padding-top:40px}
+.metric-inline{display:flex;flex-direction:column}
+.metric-inline span:first-child{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;margin-bottom:8px}
+.metric-inline span:last-child{font-size:12px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em;max-width:120px;line-height:1.4}
 
-@media (max-width:900px){
-.case-grid{grid-template-columns:1fr;gap:40px}
-.proof-strip{padding:60px 20px}
-.case-stats{flex-direction:column;gap:30px}
+@media (max-width:1024px){
+.proof-container{grid-template-columns:1fr;gap:40px;padding:60px 20px}
+.case-visual{height:400px;order:-1}
+.case-visual::after{background:linear-gradient(to bottom,transparent 60%,#04120e 100%)}
+.proof-header{flex-direction:column;align-items:flex-start;gap:20px}
+.case-metrics-inline{gap:40px}
 }
-
 @media (min-width:860px){
 .hero{min-height:calc(100svh - 88px);padding:28px}
 .hero-grid{max-width:520px}
@@ -73,6 +74,7 @@ body{font-family:"Barlow",Arial,sans-serif}
 .hero-support-copy{margin-top:16px;padding:17px 16px 16px;border-radius:16px}
 .hero-support-copy::before{font-size:13px;margin-bottom:8px}
 .hero-support-copy .video-caption{font-size:14px;line-height:1.68}
+.case-metrics-inline{flex-direction:column;gap:30px}
 }
 </style>
 <script src="assets/prelead.js" defer></script>
@@ -127,43 +129,38 @@ Seu navegador não suporta reprodução de vídeo.
 </div>
 </section>
 
-<!-- SEÇÃO REDESENHADA: EDITORIAL DARK -->
+<!-- SEÇÃO REDESENHADA: RAW EDITORIAL -->
 <section class="proof-strip" aria-labelledby="proof-title">
 <div class="proof-container">
-<div class="proof-header reveal">
+<div class="proof-header">
 <span class="eyebrow">Case Real • Pará</span>
-<h2 id="proof-title">Não vendemos grama.<br>Transformamos terra parada em lucro mensal.</h2>
+<h2 id="proof-title">Terra parada é<br>dinheiro parado.</h2>
 </div>
-
-<div class="case-grid">
-<div class="case-visual reveal">
+<div class="case-visual">
 <video autoplay loop muted playsinline poster="assets/case-antes.jpg">
 <source src="assets/case-boomerang.mp4" type="video/mp4">
 <img src="assets/case-antes.jpg" alt="Transformação do campo society">
 </video>
 </div>
-
-<div class="case-narrative reveal">
-<h3>O terreno estava lá, parado. O dinheiro também.</h3>
+<div class="case-narrative">
+<h3>
+<strong>O Terreno</strong>
+Nosso cliente tinha a área, mas o solo compactado e irregular tornava o espaço inútil. Era apenas um custo de manutenção sem retorno.
+</h3>
 <p>
-Nosso cliente tinha a área, mas o solo compactado e irregular tornava o espaço inútil para esportes ou eventos. Era apenas um custo de manutenção sem retorno.
+Entramos com a engenharia pesada: retirada total do material compactado, nivelamento laser e instalação de grama sintética de alta performance.
 </p>
-<p>
-Entramos com a engenharia pesada: retirada total do material compactado, nivelamento laser e instalação de grama sintética de alta performance. Em poucos dias, o que era um passivo virou uma <strong>arena pronta para faturar</strong>.
-</p>
-<p>
-Hoje, o espaço recebe jogos diários, torneios de fim de semana e gera receita constante. O investimento se paga pela operação, não apenas pela valorização do imóvel.
-</p>
-
-<div class="case-stats">
-<div class="stat-item">
-<span class="stat-number">R$ 45k</span>
-<span class="stat-label">Potencial de faturamento mensal estimado</span>
+<div class="highlight">
+Em 15 dias, o que era um passivo virou uma arena pronta para faturar. Hoje, o espaço recebe jogos diários e torneios de fim de semana.
 </div>
-<div class="stat-item">
-<span class="stat-number">15 dias</span>
-<span class="stat-label">Tempo médio de transformação total</span>
+<div class="case-metrics-inline">
+<div class="metric-inline">
+<span>R$ 45k</span>
+<span>Faturamento mensal estimado</span>
 </div>
+<div class="metric-inline">
+<span>15 Dias</span>
+<span>Tempo de transformação</span>
 </div>
 </div>
 </div>
