@@ -6,7 +6,8 @@
     storageKey: 'nove_society_lead_v1',
     // ALTERE AQUI as faixas de investimento da campanha.
     investmentRanges: [
-      'Até R$ 100 mil',
+      'De R$ 40 mil a R$ 60 mil',
+      'De R$ 60 mil a R$ 100 mil',
       'De R$ 100 mil a R$ 200 mil',
       'De R$ 200 mil a R$ 300 mil',
       'Acima de R$ 300 mil',
@@ -16,20 +17,20 @@
       state: { 'Pará': 3, 'Maranhão': 3, 'Tocantins': 3, 'Outro estado': 0 },
       terrain: { 'Já possuo o terreno': 4, 'Estou negociando um terreno': 2, 'Ainda estou procurando um terreno': 0, 'Já possuo uma estrutura esportiva e quero ampliar': 4 },
       area: { 'Até 800 m²': 1, 'De 800 a 1.200 m²': 2, 'De 1.200 a 2.000 m²': 4, 'Mais de 2.000 m²': 5, 'Ainda não sei': 0 },
-      investment: { 'Até R$ 100 mil': 1, 'De R$ 100 mil a R$ 200 mil': 3, 'De R$ 200 mil a R$ 300 mil': 4, 'Acima de R$ 300 mil': 5, 'Ainda estou definindo o investimento': 0 },
+      investment: { 'Até R$ 100 mil': 1, 'De R$ 40 mil a R$ 60 mil': 1, 'De R$ 60 mil a R$ 100 mil': 2, 'De R$ 100 mil a R$ 200 mil': 3, 'De R$ 200 mil a R$ 300 mil': 4, 'Acima de R$ 300 mil': 5, 'Ainda estou definindo o investimento': 0 },
       objective: { 'Criar uma arena para locação de horários': 4, 'Investir em um novo negócio': 4, 'Ampliar um complexo esportivo existente': 4, 'Campo para condomínio, escola ou empresa': 2, 'Outro objetivo': 1 },
-      timing: { 'O mais rápido possível': 5, 'Nos próximos 3 meses': 4, 'De 3 a 6 meses': 2, 'Mais de 6 meses': 1, 'Ainda estou estudando o projeto': 0 }
+      timing: { 'O mais breve possível': 5, 'Até 6 meses': 2, 'Dentro de um ano': 1, 'O mais rápido possível': 5, 'Nos próximos 3 meses': 4, 'De 3 a 6 meses': 2, 'Mais de 6 meses': 1, 'Ainda estou estudando o projeto': 0 }
     },
     thresholds: { hot: 18, warm: 10 }
   };
 
   const QUESTIONS = [
     { key:'state', title:'Onde você pretende instalar seu campo society?', options:['Pará','Maranhão','Tocantins','Outro estado'] },
-    { key:'terrain', title:'Qual é a situação do terreno?', options:['Já possuo o terreno','Estou negociando um terreno','Ainda estou procurando um terreno','Já possuo uma estrutura esportiva e quero ampliar'] },
-    { key:'area', title:'Qual é o tamanho aproximado da área disponível?', options:['Até 800 m²','De 800 a 1.200 m²','De 1.200 a 2.000 m²','Mais de 2.000 m²','Ainda não sei'] },
-    { key:'investment', title:'Quanto você pretende disponibilizar para o investimento?', options:CONFIG.investmentRanges },
     { key:'objective', title:'Qual é o principal objetivo do projeto?', options:['Criar uma arena para locação de horários','Investir em um novo negócio','Ampliar um complexo esportivo existente','Campo para condomínio, escola ou empresa','Outro objetivo'] },
-    { key:'timing', title:'Quando você pretende iniciar?', options:['O mais rápido possível','Nos próximos 3 meses','De 3 a 6 meses','Mais de 6 meses','Ainda estou estudando o projeto'] }
+    { key:'timing', title:'Quando você pretende iniciar?', options:['O mais breve possível','Até 6 meses','Dentro de um ano'] },
+    { key:'terrain', title:'Qual é a situação do terreno?', options:['Já possuo o terreno','Estou negociando um terreno','Ainda estou procurando um terreno','Já possuo uma estrutura esportiva e quero ampliar'] },
+    { key:'investment', title:'A faixa de investimento inicial é de R$ 40 mil a R$ 60 mil. Quanto você pretende investir no seu projeto?', options:CONFIG.investmentRanges },
+    { key:'area', title:'Qual é o tamanho aproximado da área disponível?', options:['Até 800 m²','De 800 a 1.200 m²','De 1.200 a 2.000 m²','Mais de 2.000 m²','Ainda não sei'] }
   ];
 
   const DEFAULT_STATE = { step:0, answers:{}, lead:{ name:'', city:'', phone:'', consent:false }, score:null, completed:false };
