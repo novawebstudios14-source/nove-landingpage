@@ -172,6 +172,22 @@
   els.floating.addEventListener('click', () => trackEvent('whatsapp_clicked', { source:'floating' }));
   if (els.vslVideo) {
     let startedTracked = false;
+    const pauseButton = document.createElement('button');
+    pauseButton.type = 'button';
+    pauseButton.className = 'video-pause';
+    pauseButton.textContent = 'Ⅱ';
+    pauseButton.setAttribute('aria-label', 'Pausar vídeo');
+    pauseButton.hidden = true;
+    els.videoShell.appendChild(pauseButton);
+    const setOverlay = (title, action, copy) => {
+      $('videoOverlayTitle').textContent = title;
+      $('videoOverlayAction').textContent = action;
+      $('videoOverlayCopy').textContent = copy;
+      els.videoShell.classList.remove('is-playing');
+      pauseButton.hidden = true;
+      els.videoPlay.hidden = false;
+      els.videoPlay.setAttribute('aria-label', action);
+    };
     const formatVideoTime = seconds => {
       if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
       const mins = Math.floor(seconds / 60);
@@ -189,11 +205,14 @@
       if (els.videoTime) els.videoTime.textContent = `${formatVideoTime(current)} / ${formatVideoTime(duration)}`;
     };
     const toggleVideo = () => {
-      if (els.vslVideo.paused || els.vslVideo.ended) els.vslVideo.play();
+      if (els.vslVideo.paused || els.vslVideo.ended) {
+        els.vslVideo.play().catch(() => setOverlay('Não foi possível iniciar o vídeo.', 'Tentar novamente', 'Toque para tentar reproduzir.'));
+      }
       else els.vslVideo.pause();
     };
     if (els.videoPlay) els.videoPlay.addEventListener('click', toggleVideo);
     els.vslVideo.addEventListener('click', toggleVideo);
+    pauseButton.addEventListener('click', toggleVideo);
     if (els.videoProgress) {
       els.videoProgress.addEventListener('input', e => {
         const duration = els.vslVideo.duration || 0;
@@ -205,6 +224,8 @@
     els.vslVideo.addEventListener('durationchange', updateVideoUI);
     els.vslVideo.addEventListener('timeupdate', updateVideoUI);
     els.vslVideo.addEventListener('play', () => {
+      els.videoShell.classList.add('is-playing');
+      pauseButton.hidden = false;
       if (els.videoPlay) els.videoPlay.hidden = true;
       if (!startedTracked) {
         startedTracked = true;
@@ -214,15 +235,13 @@
     });
     els.vslVideo.addEventListener('pause', () => {
       if (!els.vslVideo.ended && els.videoPlay) {
-        els.videoPlay.hidden = false;
-        els.videoPlay.setAttribute('aria-label', 'Continuar vídeo');
+        setOverlay('Continue de onde parou.', 'Continuar vídeo', 'Retome o vídeo para conhecer os próximos passos do seu projeto.');
       }
       updateVideoUI();
     });
     els.vslVideo.addEventListener('ended', () => {
       if (els.videoPlay) {
-        els.videoPlay.hidden = false;
-        els.videoPlay.setAttribute('aria-label', 'Reproduzir vídeo novamente');
+        setOverlay('Agora, vamos ao seu projeto?', 'Assistir novamente', 'O questionário está logo abaixo do vídeo.');
       }
       updateVideoUI();
       if (els.vslStatus) els.vslStatus.textContent = 'Vídeo concluído. Você pode iniciar a análise do projeto.';
