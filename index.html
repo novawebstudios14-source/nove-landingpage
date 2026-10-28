@@ -13,7 +13,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700;800&display=swap');
 body{font-family:"Barlow",Arial,sans-serif}
 .brand,.campaign-label,.eyebrow,.question-kicker,.primary-cta,.play-instruction{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif}
-.hero h1,.proof-heading h2,.closing-section h2,.lead-form h2,.result-panel h2,.question-title{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:.95}
+.hero h1,.proof-heading h2,.closing-section h2,.lead-form h2,.result-panel h2,.question-title,.case-title{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:.95}
 .brand{font-weight:900;letter-spacing:-.035em}
 .campaign-label{font-weight:600}
 .eyebrow,.question-kicker{font-weight:700;letter-spacing:.12em}
@@ -34,6 +34,26 @@ body{font-family:"Barlow",Arial,sans-serif}
 .prelead-error{color:#b53d3d;min-height:16px;font-size:12px;font-weight:600}
 .captured-field{display:none!important}
 .floating-whatsapp svg{width:28px;height:28px;fill:#fff}
+.proof-strip{padding:60px 20px;background:#f5f3ed}
+.proof-heading{max-width:1200px;margin:0 auto 40px}
+.proof-heading h2{font-size:clamp(32px,5vw,48px);margin:12px 0 16px;color:#0d2d22}
+.proof-heading p{color:#5a6b63;line-height:1.6;font-size:16px;max-width:600px}
+.case-showcase{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.case-media{position:relative;border-radius:24px;overflow:hidden;background:#0d2d22;aspect-ratio:9/16;max-height:600px}
+.case-media video,.case-media img{width:100%;height:100%;object-fit:cover;display:block}
+.case-badge{position:absolute;top:20px;left:20px;background:rgba(255,255,255,.95);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2d6f54}
+.case-content h3{font-size:clamp(28px,4vw,36px);margin:0 0 20px;color:#0d2d22}
+.case-story{color:#344a41;line-height:1.8;font-size:16px;margin-bottom:24px}
+.case-story strong{color:#0d2d22;font-weight:700}
+.case-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px}
+.metric-card{background:#fff;padding:20px;border-radius:16px;border:1px solid rgba(11,23,19,.08)}
+.metric-value{font-family:"Barlow Condensed",sans-serif;font-size:32px;font-weight:800;color:#2d6f54;margin-bottom:4px}
+.metric-label{font-size:13px;color:#5a6b63;line-height:1.4}
+@media (max-width:768px){
+.case-showcase{grid-template-columns:1fr;gap:32px}
+.case-media{max-height:500px}
+.case-metrics{grid-template-columns:1fr}
+}
 @media (min-width:860px){
 .hero{min-height:calc(100svh - 88px);padding:28px}
 .hero-grid{max-width:520px}
@@ -47,6 +67,7 @@ body{font-family:"Barlow",Arial,sans-serif}
 .hero-support-copy{margin-top:16px;padding:17px 16px 16px;border-radius:16px}
 .hero-support-copy::before{font-size:13px;margin-bottom:8px}
 .hero-support-copy .video-caption{font-size:14px;line-height:1.68}
+.proof-strip{padding:40px 14px}
 }
 </style>
 <script src="assets/prelead.js" defer></script>
@@ -104,12 +125,34 @@ Seu navegador não suporta reprodução de vídeo.
 <div class="proof-heading reveal">
 <p class="eyebrow">Experiência regional</p>
 <h2 id="proof-title">Projetos executados no Pará e região</h2>
-<p>Área preparada para receber projetos, antes/depois, arenas, depoimentos e números reais da NOVE.</p>
+<p>Transformações reais que mostram como um terreno compactado pode se tornar uma arena pronta para receber jogos, eventos e gerar receita.</p>
 </div>
-<div class="proof-placeholders reveal" aria-label="Espaços reservados para provas sociais futuras">
-<div><span>01</span><p>Projeto / arena</p></div>
-<div><span>02</span><p>Antes e depois</p></div>
-<div><span>03</span><p>Depoimento / dados reais</p></div>
+<div class="case-showcase reveal">
+<div class="case-media">
+<span class="case-badge">Antes → Depois</span>
+<video autoplay loop muted playsinline aria-label="Boomerang mostrando transformação do campo society">
+<source src="assets/case-boomerang.mp4" type="video/mp4">
+<img src="assets/case-antes.jpg" alt="Campo society antes da revitalização - terreno compactado sem grama">
+</video>
+</div>
+<div class="case-content">
+<h3 class="case-title">Do terreno compactado à arena pronta para jogo</h3>
+<p class="case-story">
+<strong>O desafio:</strong> Um cliente nos procurou com um terreno que havia sido compactado, mas estava longe de ser um campo society funcional. A superfície irregular e sem grama impossibilitava qualquer tipo de uso esportivo ou comercial.<br><br>
+<strong>A solução:</strong> Realizamos a retirada completa do material compactado, preparamos o terreno com nivelamento técnico e aplicamos grama sintética de alta performance, transformando o espaço em uma arena pronta para receber partidas, treinamentos e eventos.<br><br>
+<strong>O resultado:</strong> Em poucos dias, o que era apenas um terreno improdutivo se tornou um ativo gerador de receita, com potencial de faturamento mensal e valorização imobiliária imediata.
+</p>
+<div class="case-metrics">
+<div class="metric-card">
+<div class="metric-value">100%</div>
+<div class="metric-label">Terreno transformado em arena funcional</div>
+</div>
+<div class="metric-card">
+<div class="metric-value">R$ 20-60k</div>
+<div class="metric-label">Potencial de receita mensal após implantação</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section class="quiz-section" id="analise" aria-labelledby="quiz-title" hidden>
