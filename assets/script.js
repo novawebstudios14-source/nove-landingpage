@@ -244,7 +244,8 @@
         setOverlay('Agora, vamos ao seu projeto?', 'Assistir novamente', 'O questionário está logo abaixo do vídeo.');
       }
       updateVideoUI();
-      if (els.vslStatus) els.vslStatus.textContent = 'Vídeo concluído. Você pode iniciar a análise do projeto.';
+      if (els.vslStatus) els.vslStatus.textContent = 'Vídeo concluído. Abrindo o questionário.';
+      $('startQuizBtn').click();
     });
     updateVideoUI();
   }
