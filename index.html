@@ -421,8 +421,83 @@ main{padding-top:60px}
 .video-shell .video-loading{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(6,23,17,.48);color:#fff;font:600 15px/1.4 sans-serif;pointer-events:none}
 .video-loading::before{content:"";width:22px;height:22px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:video-loading-spin .8s linear infinite}
 @keyframes video-loading-spin{to{transform:rotate(360deg)}}
-</style></head>
-<body>
+</style><style>
+/* Compact mobile header with separate space for brand and campaign. */
+@media(max-width:768px){
+  .site-header{position:relative;inset:auto;height:auto;min-height:60px;padding:12px 16px;gap:20px;box-sizing:border-box}
+  .site-header .brand{flex:0 0 auto;min-width:0}
+  .site-header .brand img{height:auto!important;width:140px!important;max-width:100%}
+  .site-header .campaign-label{min-width:0;max-width:170px;margin-left:auto;font-size:10px;line-height:1.45;letter-spacing:.08em;text-align:right;text-wrap:balance}
+  main{padding-top:0}
+  .hero{min-height:0;align-items:flex-start;padding-top:8px}
+}
+@media(max-width:360px){
+  .site-header{gap:16px}
+  .site-header .brand img{width:126px!important}
+  .site-header .campaign-label{font-size:9px}
+}
+</style><style>
+html.video-preparing{overflow:hidden}
+.page-video-loader{display:none}
+.video-preparing .page-video-loader{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:28px;background:#0d0d05;color:#fff;text-align:center;font:500 16px/1.5 sans-serif}
+.page-video-loader img{width:180px;height:auto}
+.page-video-loader p{max-width:320px;margin:0}
+.page-video-loader button{padding:12px 20px;border:1px solid #60a000;border-radius:8px;background:#60a000;color:#fff;font:600 15px sans-serif;cursor:pointer}
+.page-video-loader .loader-ring{width:32px;height:32px;border:3px solid #ffffff30;border-top-color:#60a000;border-radius:50%;animation:video-loading-spin .8s linear infinite}
+</style><script>
+(() => {
+  document.documentElement.classList.add('video-preparing');
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('vslVideo');
+    const loader = document.getElementById('pageVideoLoader');
+    const message = document.getElementById('pageVideoLoaderMessage');
+    const proceed = document.getElementById('pageVideoLoaderContinue');
+    if (!video || !loader) { document.documentElement.classList.remove('video-preparing'); return; }
+    const content = [...document.body.children].filter(el => el !== loader && !['SCRIPT','STYLE'].includes(el.tagName));
+    content.forEach(el => el.inert = true);
+    let finished = false;
+    let slowTimer;
+    const events = ['progress','loadeddata','canplay','canplaythrough','durationchange'];
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(slowTimer);
+      events.forEach(name => video.removeEventListener(name, check));
+      video.removeEventListener('error', fail);
+      document.documentElement.classList.remove('video-preparing');
+      loader.hidden = true;
+      content.forEach(el => el.inert = false);
+    };
+    const check = () => {
+      const target = Math.min(6, Number.isFinite(video.duration) ? video.duration : 6);
+      for (let i = 0; i < video.buffered.length; i++) {
+        if (video.readyState >= 3 && video.buffered.start(i) <= .1 && video.buffered.end(i) >= target) { finish(); return; }
+      }
+      if (video.readyState === 4) finish();
+    };
+    const fail = () => {
+      message.textContent = 'Não foi possível preparar o vídeo. Você pode abrir a página e tentar novamente.';
+      proceed.hidden = false;
+    };
+    proceed.addEventListener('click', finish);
+    events.forEach(name => video.addEventListener(name, check));
+    video.addEventListener('error', fail);
+    slowTimer = setTimeout(() => {
+      message.textContent = 'O vídeo ainda está carregando. Aguarde ou abra a página para tentar pelo play.';
+      proceed.hidden = false;
+    }, 15000);
+    video.preload = 'auto';
+    check();
+  }, { once: true });
+})();
+</script></head>
+<body>
+<div class="page-video-loader" id="pageVideoLoader" role="status" aria-live="polite">
+<img src="assets/logo-0.png" alt="NOVE">
+<span class="loader-ring" aria-hidden="true"></span>
+<p id="pageVideoLoaderMessage">Preparando o vídeo para você…</p>
+<button id="pageVideoLoaderContinue" type="button" hidden>Abrir página</button>
+</div>
 <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
 <header class="site-header" aria-label="Cabeçalho">
 <a class="brand" href="#topo" aria-label="NOVEREVES, início"><img loading="lazy" decoding="async" src="assets/logo-0.png" alt="NOVEREVES" style="height:32px;width:auto;display:block"></a>
