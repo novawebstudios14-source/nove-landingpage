@@ -24,13 +24,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare lightweight site and optimize video
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
+          mkdir -p site-dist/assets
+          cp index.html .nojekyll site-dist/
+          cp assets/styles.css assets/script.js assets/prelead.js assets/favicon.svg site-dist/assets/
+          cp assets/logo-0.png assets/logo-1.png assets/logo-2.png assets/case-0.jpg assets/case-1.jpg site-dist/assets/
+          ffmpeg -hide_banner -loglevel error -i assets/vsl.mp4 -vf fps=30 -c:v libx264 -preset slow -threads 4 -crf 24 -maxrate 1800k -bufsize 3600k -pix_fmt yuv420p -movflags +faststart -g 60 -c:a aac -b:a 96k site-dist/assets/vsl-optimized.mp4
+          ffmpeg -hide_banner -loglevel error -ss 0.1 -i site-dist/assets/vsl-optimized.mp4 -frames:v 1 -q:v 3 site-dist/assets/vsl-poster.jpg
+          test -s site-dist/assets/vsl-optimized.mp4
+          echo "Original and optimized video bytes:"
+          wc -c assets/vsl.mp4 site-dist/assets/vsl-optimized.mp4
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: '.'
+          path: 'site-dist'
 
       - name: Deploy
         id: deployment
