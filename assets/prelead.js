@@ -255,6 +255,7 @@
 
     const nextUrl = new URL(window.location.href);
     nextUrl.searchParams.set('quiz', '1');
+    nextUrl.searchParams.set('v', 'contrast-20261102-3');
     nextUrl.hash = 'analise';
     window.location.replace(nextUrl.toString());
   });
