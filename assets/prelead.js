@@ -200,8 +200,30 @@
     });
   };
 
+  let transitionActive = false;
+  let quizIntroShown = false;
+  const showQuizIntro = (next) => {
+    if (transitionActive) return;
+    transitionActive = true;
+    const intro = document.getElementById('quizIntro');
+    document.getElementById('vslVideo')?.pause();
+    if (!intro) { transitionActive = false; next(); return; }
+    intro.hidden = false;
+    intro.focus({ preventScroll: true });
+    setTimeout(() => {
+      try { next(); }
+      finally { intro.hidden = true; transitionActive = false; }
+    }, 1100);
+  };
+
   startBtn.addEventListener('click', (event) => {
     if (bypassCaptureOnce) {
+      if (!quizIntroShown) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        showQuizIntro(() => { quizIntroShown = true; startBtn.click(); });
+        return;
+      }
       bypassCaptureOnce = false;
       return;
     }
@@ -209,7 +231,7 @@
     event.preventDefault();
     event.stopImmediatePropagation();
     pushEvent('lead_capture_opened');
-    showPreLead();
+    showQuizIntro(showPreLead);
   }, true);
 
   preLeadPhone.addEventListener('input', (event) => {
