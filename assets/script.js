@@ -173,6 +173,7 @@
   if (els.vslVideo) {
     let startedTracked = false;
     let playPending = false;
+    let bufferingTimeout;
     const loadingIndicator = document.createElement('div');
     loadingIndicator.className = 'video-loading';
     loadingIndicator.textContent = 'Carregando vídeo…';
@@ -182,6 +183,13 @@
     const setLoading = loading => {
       loadingIndicator.hidden = !loading;
       els.videoShell.setAttribute('aria-busy', String(loading));
+      clearTimeout(bufferingTimeout);
+      if (loading) bufferingTimeout = setTimeout(() => {
+        playPending = false;
+        els.vslVideo.pause();
+        setLoading(false);
+        setOverlay('O vídeo demorou a responder.', 'Tentar novamente', 'Toque para tentar iniciar o vídeo novamente.');
+      }, 12000);
     };
     els.vslVideo.addEventListener('waiting', () => {
       if (!els.vslVideo.paused) setLoading(true);
@@ -253,7 +261,7 @@
     els.vslVideo.addEventListener('loadedmetadata', updateVideoUI);
     els.vslVideo.addEventListener('durationchange', updateVideoUI);
     els.vslVideo.addEventListener('timeupdate', updateVideoUI);
-    els.vslVideo.addEventListener('play', () => {
+    els.vslVideo.addEventListener('playing', () => {
       els.videoShell.classList.add('is-playing');
       pauseButton.hidden = false;
       if (els.videoPlay) els.videoPlay.hidden = true;
