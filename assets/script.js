@@ -172,6 +172,29 @@
   els.floating.addEventListener('click', () => trackEvent('whatsapp_clicked', { source:'floating' }));
   if (els.vslVideo) {
     let startedTracked = false;
+    let playPending = false;
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'video-loading';
+    loadingIndicator.textContent = 'Carregando vídeo…';
+    loadingIndicator.setAttribute('role', 'status');
+    loadingIndicator.hidden = true;
+    els.videoShell.appendChild(loadingIndicator);
+    const setLoading = loading => {
+      loadingIndicator.hidden = !loading;
+      els.videoShell.setAttribute('aria-busy', String(loading));
+    };
+    els.vslVideo.addEventListener('waiting', () => {
+      if (!els.vslVideo.paused) setLoading(true);
+    });
+    els.vslVideo.addEventListener('playing', () => {
+      playPending = false;
+      setLoading(false);
+    });
+    els.vslVideo.addEventListener('error', () => {
+      playPending = false;
+      setLoading(false);
+      setOverlay('Não foi possível carregar o vídeo.', 'Tentar novamente', 'Confira sua conexão e toque para tentar novamente.');
+    });
     const pauseButton = document.createElement('button');
     pauseButton.type = 'button';
     pauseButton.className = 'video-pause';
@@ -205,8 +228,15 @@
       if (els.videoTime) els.videoTime.textContent = `${formatVideoTime(current)} / ${formatVideoTime(duration)}`;
     };
     const toggleVideo = () => {
+      if (playPending) return;
       if (els.vslVideo.paused || els.vslVideo.ended) {
-        els.vslVideo.play().catch(() => setOverlay('Não foi possível iniciar o vídeo.', 'Tentar novamente', 'Toque para tentar reproduzir.'));
+        playPending = true;
+        setLoading(true);
+        els.vslVideo.play().catch(() => {
+          playPending = false;
+          setLoading(false);
+          setOverlay('Não foi possível iniciar o vídeo.', 'Tentar novamente', 'Toque para tentar reproduzir.');
+        });
       }
       else els.vslVideo.pause();
     };
@@ -234,6 +264,8 @@
       }
     });
     els.vslVideo.addEventListener('pause', () => {
+      playPending = false;
+      setLoading(false);
       if (!els.vslVideo.ended && els.videoPlay) {
         setOverlay('Continue de onde parou.', 'Continuar vídeo', 'Retome o vídeo para conhecer os próximos passos do seu projeto.');
       }
