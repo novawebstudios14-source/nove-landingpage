@@ -192,7 +192,7 @@
 
     requestAnimationFrame(() => {
       resetPreLeadForm();
-      quizSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      quizSection.scrollIntoView({ behavior: 'instant', block: 'start' });
       setTimeout(() => {
         resetPreLeadForm();
         preLeadName.focus({ preventScroll: true });

@@ -146,13 +146,13 @@
     if (state.completed && state.score) showResult();
     else if (state.step >= QUESTIONS.length) showLeadForm();
     else renderQuestion();
-    setTimeout(() => els.quizSection.scrollIntoView({behavior:'smooth',block:'start'}), 30);
+    setTimeout(() => els.quizSection.scrollIntoView({behavior:'instant',block:'start'}), 30);
   }
 
   function restart(){
     state = structuredClone(DEFAULT_STATE); saveState();
     els.quizSection.hidden = false; renderQuestion();
-    els.quizSection.scrollIntoView({behavior:'smooth',block:'start'});
+    els.quizSection.scrollIntoView({behavior:'instant',block:'start'});
   }
 
   $('startQuizBtn').addEventListener('click', openQuiz);
